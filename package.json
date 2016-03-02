@@ -4,6 +4,8 @@
   "description": "About comic building by react and web crawler",
   "main": "index.js",
   "dependencies": {
+    "cheerio": "^0.20.0",
+    "jquery": "^2.2.1",
     "node-libcurl": "^0.8.0"
   },
   "devDependencies": {},
