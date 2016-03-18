@@ -7,13 +7,19 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
+var main       = require('./main');
 
 // DB
-var mongoose   = require('mongoose');
-mongoose.connect('mongodb://comicr:hunter318@ds033018.mlab.com:33018/comicr'); // connect to our database
+// var mongoose   = require('mongoose');
+// var uri = 'mongodb://comicr:hunter318@ds033018.mlab.com:33018/comicr';
+// mongoose.connect(uri, function(error) {
+//     console.log(error);
+// }); // connect to our database
+// // Output - 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
+// console.log(mongoose.connection.readyState);
 
 // Start your program
-var Bear     = require('./app/models/bear');
+// var Bear     = require('./app/models/bear');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -35,7 +41,10 @@ router.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+    var data = main._run();
+    // console.log(data);
+    // console.log(main._run);
+    res.json(data);
 });
 
 // more routes for our API will happen here
