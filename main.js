@@ -4,7 +4,7 @@ var cheerio = require('cheerio');
  
 var curl = new Curl();
 var websitetitle = "manhua.fzdm.com/";
-        var result = [];
+var result = [];
   
 module.exports = {
     _run: function () {
@@ -76,12 +76,17 @@ module.exports = {
         //     result.push({name: name, titles: titles[name]});
         //   }
         // }
-        this.close();
+    // console.info(result);
+    console.dir(result);
+    return result;
+        // this.close();
     });
 
     curl.on( 'error', curl.close.bind( curl ) );
     curl.perform();
+    // console.dir(result);
     return result;
+    //return result;
     // return "{ message: 'Bear created!' }";
     }
 };

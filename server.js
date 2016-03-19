@@ -42,9 +42,11 @@ router.use(function(req, res, next) {
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
     var data = main._run();
-    // console.log(data);
+    console.info(data);
     // console.log(main._run);
-    res.json(data);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(data, null, 3));
+    // res.json(data);
 });
 
 // more routes for our API will happen here
