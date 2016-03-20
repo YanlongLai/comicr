@@ -8,6 +8,7 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var main       = require('./main');
+var data 	   = [];
 
 // DB
 // var mongoose   = require('mongoose');
@@ -26,6 +27,10 @@ var main       = require('./main');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// initial function
+if(data.length == 0)
+data = main._run();
+
 var port = process.env.PORT || 8080;        // set our port
 
 // ROUTES FOR OUR API
@@ -41,8 +46,9 @@ router.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-    var data = main._run();
-    console.info(data);
+	if(data.length == 0)
+    data = main._run();
+    // console.info(data);
     // console.log(main._run);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(data, null, 3));

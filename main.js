@@ -40,6 +40,7 @@ module.exports = {
         $('li').each(function(i, elem) {
             var href = $(this).find('a').attr('href');
             if(href !== undefined){
+                // logic to parese html dom
                 fruits[comic_num] = $(this).text();
                 newTitles[comic_num] = $(this).find('a').text();
                 newHrefs[comic_num] = $(this).find('a').attr('href');
@@ -49,36 +50,26 @@ module.exports = {
                 images[comic_num] = $(this).find('img').attr('src');
 
             // newest comic data
-            if(newTitles[comic_num]!=="" || newTimes[comic_num]!==""){
+            if(newTimes[comic_num]!==""){
                 // console.info("newTitles: " + newTitles[comic_num]+ ", newHrefs: " + newHrefs[comic_num] + ", newTimes: " + newTimes[comic_num]);
-                result.push({ newTitles: newTitles[comic_num], newHrefs: newHrefs[comic_num], newTimes: newTimes[comic_num]});
+                result.push({ titles: newTitles[comic_num], hrefs: newHrefs[comic_num], images: 0, times: newTimes[comic_num]});
                 comic_num++;
             }
 
             // all comic data
-            else {
+            else if(images[comic_num]!=="" && titles[comic_num]!==undefined) {
                 // Trcae code example
                 // console.info("i: "+i+", elem: "+$(this)+ ", titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
                 // console.info("titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
-                result.push({titles: titles[comic_num], hrefs: hrefs[comic_num], images: images[comic_num]});
+                result.push({ titles: titles[comic_num], hrefs: hrefs[comic_num], images: images[comic_num], times: 0});
                 comic_num++;
               }
             }
         });
-        //fruits.join(', ');
-        //$('.round').data();
 
-        //console.info($.html());
-        //console.info(fruits);
-
-        // for (var name in titles) {
-        //   if (titles.hasOwnProperty(name)) {
-        //     result.push({name: name, titles: titles[name]});
-        //   }
-        // }
     // console.info(result);
-    console.dir(result);
-    return result;
+    // console.dir(result);
+    // return result;
         // this.close();
     });
 
