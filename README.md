@@ -9,7 +9,7 @@ install steps:
 3. npm install node-libcurl --build-from-source
 ```
 
-```node module
+```node_module
 1. express is the Node framework
 2. mongoose is the ORM we will use to communicate with our MongoDB database
 3. body-parser will let us pull POST content from our HTTP request so that we can do things like create a bear
