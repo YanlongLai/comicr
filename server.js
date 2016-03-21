@@ -28,10 +28,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // initial function
+// TODO follow data to parser all comic volumns and save them
+// 		and then pass to specfic router path 
 if(data.length == 0)
 data = main._run();
 
-var port = process.env.PORT || 8080;        // set our port
+var port = process.env.PORT || 8000;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -40,19 +42,32 @@ var router = express.Router();              // get an instance of the express Ro
 // middleware to use for all requests
 router.use(function(req, res, next) {
     // do logging
+    console.log(data.length);
     console.log('Something is happening.');
     next(); // make sure we go to the next routes and don't stop here
 });
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
+router.get('/', function(req, res, next) {
 	if(data.length == 0)
     data = main._run();
     // console.info(data);
     // console.log(main._run);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(data, null, 3));
+    res.end();
     // res.json(data);
+    // next();
+});
+
+router.get('/:comic*', function(req, res, next) {
+	var comic = req.param('comic');
+	var volumn = main._getVolumn(comic);
+
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify(volumn, null, 3));
+	res.end();
+	// next();
 });
 
 // more routes for our API will happen here
@@ -93,4 +108,4 @@ app.use('/api', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Comic Server runs on port ' + port);

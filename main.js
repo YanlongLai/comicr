@@ -5,6 +5,7 @@ var cheerio = require('cheerio');
 var curl = new Curl();
 var websitetitle = "manhua.fzdm.com/";
 var result = [];
+var volumn = [];
   
 module.exports = {
     _run: function () {
@@ -115,7 +116,7 @@ module.exports = {
                 // newest comic data
                 if(newTimes[comic_num]!==""){
                     // console.info("newTitles: " + newTitles[comic_num]+ ", newHrefs: " + newHrefs[comic_num] + ", newTimes: " + newTimes[comic_num]);
-                    result.push({ titles: newTitles[comic_num], hrefs: newHrefs[comic_num], images: 0, times: newTimes[comic_num]});
+                    volumn.push({ titles: newTitles[comic_num], hrefs: newHrefs[comic_num], images: 0, times: newTimes[comic_num]});
                     comic_num++;
                 }
 
@@ -124,7 +125,7 @@ module.exports = {
                     // Trcae code example
                     // console.info("i: "+i+", elem: "+$(this)+ ", titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
                     // console.info("titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
-                    result.push({ titles: titles[comic_num], hrefs: hrefs[comic_num]});
+                    volumn.push({ titles: titles[comic_num], hrefs: hrefs[comic_num]});
                     comic_num++;
                   }
                 }
@@ -134,6 +135,6 @@ module.exports = {
         });
             curl.on( 'error', curl.close.bind( curl ) );
             curl.perform();
-            return result;
+            return volumn;
     }
 };
