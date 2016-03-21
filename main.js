@@ -74,6 +74,7 @@ module.exports = {
     }
 
     , _getVolumn: function (comic_href) {
+        var websitetitle = "manhua.fzdm.com/" + comic_href;
         curl.setOpt( 'URL', websitetitle );
         curl.setOpt( 'FOLLOWLOCATION', true );
        
@@ -123,7 +124,7 @@ module.exports = {
                     // Trcae code example
                     // console.info("i: "+i+", elem: "+$(this)+ ", titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
                     // console.info("titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
-                    result.push({ titles: titles[comic_num], hrefs: hrefs[comic_num], images: images[comic_num], times: 0});
+                    result.push({ titles: titles[comic_num], hrefs: hrefs[comic_num]});
                     comic_num++;
                   }
                 }
