@@ -2,7 +2,7 @@
 About comic building by react and web crawler
 
 node-libcurl
-install steps:
+install steps:      
 linux
 ```linux
 1. npm clean cache
