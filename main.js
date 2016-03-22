@@ -6,6 +6,7 @@ var cheerio = require('cheerio');
 var websitetitle = "manhua.fzdm.com/";
 var result = [];
 var volumn = [];
+var volumn_detail = [];
 var page = [];
   
 module.exports = {
@@ -118,25 +119,34 @@ module.exports = {
                     hrefs[comic_num] = $(this).find('a').attr('href');
                     images[comic_num] = $(this).find('img').attr('src');
 
-                // newest comic data
-                if(newTimes[comic_num]!==""){
-                    // console.info("newTitles: " + newTitles[comic_num]+ ", newHrefs: " + newHrefs[comic_num] + ", newTimes: " + newTimes[comic_num]);
-                    volumn.push({ titles: newTitles[comic_num], hrefs: newHrefs[comic_num], images: 0, times: newTimes[comic_num]});
-                    comic_num++;
-                }
+                    // newest comic data
+                    // if(newTimes[comic_num]!==""){
+                    //     // console.info("newTitles: " + newTitles[comic_num]+ ", newHrefs: " + newHrefs[comic_num] + ", newTimes: " + newTimes[comic_num]);
+                    //     volumn.push({ titles: newTitles[comic_num], hrefs: newHrefs[comic_num], images: 0, times: newTimes[comic_num]});
+                    //     comic_num++;
+                    // }
 
-                // all comic data
-                else if(images[comic_num]!=="" && titles[comic_num]!==undefined) {
-                    // Trcae code example
-                    // console.info("i: "+i+", elem: "+$(this)+ ", titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
-                    // console.info("titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
-                    volumn.push({ titles: titles[comic_num], hrefs: hrefs[comic_num]});
-                    comic_num++;
-                  }
+                    // all comic data
+                    if(images[comic_num]!=="" && titles[comic_num]!==undefined) {
+                        // Trcae code example
+                        // console.info("i: "+i+", elem: "+$(this)+ ", titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
+                        // console.info("titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
+                        volumn.push({ titles: titles[comic_num], hrefs: hrefs[comic_num]});
+                        comic_num++;
+                    }
                 }
             });
-            setJson(volumn);
-            volumn = [];
+            for (i = 0; i < volumn.length; i++) {
+                if(i==0)
+                volumn_detail.push({ titles: volumn[i].titles, hrefs: volumn[i].hrefs, next: 0, prev: volumn[i+1].hrefs});
+                else if(i==volumn.length-1)
+                volumn_detail.push({ titles: volumn[i].titles, hrefs: volumn[i].hrefs, next: volumn[i-1].hrefs, prev: 0});
+                else
+                volumn_detail.push({ titles: volumn[i].titles, hrefs: volumn[i].hrefs, next: volumn[i-1].hrefs, prev: volumn[i+1].hrefs});
+                // console.log(a[index]);
+            }
+            setJson(volumn_detail);
+            volumn_detail = [];
             // return result;
             this.close();
         });
