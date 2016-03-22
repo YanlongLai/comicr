@@ -8,7 +8,6 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var main       = require('./main');
-var data 	   = [];
 
 // DB
 // var mongoose   = require('mongoose');
@@ -30,8 +29,7 @@ app.use(bodyParser.json());
 // initial function
 // TODO follow data to parser all comic volumns and save them
 // 		and then pass to specfic router path 
-if(data.length == 0)
-data = main._run();
+
 
 var port = process.env.PORT || 8000;        // set our port
 
@@ -39,35 +37,39 @@ var port = process.env.PORT || 8000;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
+
+
 // middleware to use for all requests
 router.use(function(req, res, next) {
     // do logging
-    console.log(data.length);
-    console.log('Something is happening.');
+    // console.log(data.length);
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    var userAgent = req.headers['user-agent'];
+    console.log(userAgent + '\n' + ip);
     next(); // make sure we go to the next routes and don't stop here
 });
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res, next) {
-	if(data.length == 0)
-    data = main._run();
-    // console.info(data);
     // console.log(main._run);
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(data, null, 3));
-    res.end();
-    // res.json(data);
-    // next();
+    main._run( function (data) {
+        res.write(JSON.stringify(data, null, 3));
+    });
+
 });
 
 router.get('/:comic*', function(req, res, next) {
-	var comic = req.param('comic');
-	var volumn = main._getVolumn(comic);
+    var comic = req.param('comic');
+    res.setHeader('Content-Type', 'application/json');
+    main._getVolumn(comic, function (data) {
+        res.write(JSON.stringify(data, null, 3));
+    });
 
-	res.setHeader('Content-Type', 'application/json');
-	res.send(JSON.stringify(volumn, null, 3));
-	res.end();
-	// next();
+    // res.setHeader('Content-Type', 'application/json');
+    // res.send(JSON.stringify(volumn, null, 3));
+    // res.end();
+    // next();
 });
 
 // more routes for our API will happen here

@@ -3,7 +3,7 @@ var Curl = require( 'node-libcurl' ).Curl;
 var cheerio = require('cheerio');
  
 var curl = new Curl();
-var websitetitle = "manhua.fzdm.com/25";
+var websitetitle = "manhua.fzdm.com/25/155";
 var result = [];
 
 curl.setOpt( 'URL', websitetitle );

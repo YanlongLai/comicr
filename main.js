@@ -8,7 +8,7 @@ var result = [];
 var volumn = [];
   
 module.exports = {
-    _run: function () {
+    _run: function (setJson) {
         curl.setOpt( 'URL', websitetitle );
         curl.setOpt( 'FOLLOWLOCATION', true );
         //curl.setOpt( 'CURLOPT_CONNECTTIMEOUT', 2 );
@@ -66,6 +66,8 @@ module.exports = {
                   }
                 }
             });
+            setJson(result);
+            result = [];
             // return result;
             // this.close();
         });
@@ -74,7 +76,7 @@ module.exports = {
             return result;
     }
 
-    , _getVolumn: function (comic_href) {
+    , _getVolumn: function (comic_href, setJson) {
         var websitetitle = "manhua.fzdm.com/" + comic_href;
         curl.setOpt( 'URL', websitetitle );
         curl.setOpt( 'FOLLOWLOCATION', true );
@@ -130,11 +132,13 @@ module.exports = {
                   }
                 }
             });
+            setJson(volumn);
+            volumn = [];
             // return result;
             // this.close();
         });
             curl.on( 'error', curl.close.bind( curl ) );
             curl.perform();
-            return volumn;
+            // return volumn;
     }
 };
