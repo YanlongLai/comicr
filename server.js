@@ -55,21 +55,33 @@ router.get('/', function(req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     main._run( function (data) {
         res.write(JSON.stringify(data, null, 3));
+        res.end();
     });
 
 });
 
-router.get('/:comic*', function(req, res, next) {
+router.get('/:comic', function(req, res, next) {
     var comic = req.param('comic');
     res.setHeader('Content-Type', 'application/json');
     main._getVolumn(comic, function (data) {
         res.write(JSON.stringify(data, null, 3));
+        res.end();
     });
 
     // res.setHeader('Content-Type', 'application/json');
     // res.send(JSON.stringify(volumn, null, 3));
     // res.end();
     // next();
+});
+
+router.get('/:comic/:volumn*', function(req, res, next) {
+    var comic = req.param('comic');
+    var volumn = req.param('volumn');
+    res.setHeader('Content-Type', 'application/json');
+    main._getPage(comic, volumn, 0, function (data) {
+        res.write(JSON.stringify(data, null, 3));
+        res.end();
+    });
 });
 
 // more routes for our API will happen here
