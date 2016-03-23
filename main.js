@@ -55,7 +55,7 @@ module.exports = {
                 // newest comic data
                 if(newTimes[comic_num]!==""){
                     // console.info("newTitles: " + newTitles[comic_num]+ ", newHrefs: " + newHrefs[comic_num] + ", newTimes: " + newTimes[comic_num]);
-                    result.push({ titles: newTitles[comic_num], hrefs: newHrefs[comic_num], images: 0, times: newTimes[comic_num]});
+                    result.push({ titles: newTitles[comic_num], hrefs: newHrefs[comic_num], images: null, times: newTimes[comic_num]});
                     comic_num++;
                 }
 
@@ -64,7 +64,7 @@ module.exports = {
                     // Trcae code example
                     // console.info("i: "+i+", elem: "+$(this)+ ", titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
                     // console.info("titles: " + titles[comic_num]+ ", hrefs: " + hrefs[comic_num] + ", images: " + images[comic_num]);
-                    result.push({ titles: titles[comic_num], hrefs: hrefs[comic_num], images: images[comic_num], times: 0});
+                    result.push({ titles: titles[comic_num], hrefs: hrefs[comic_num], images: images[comic_num], times: null});
                     comic_num++;
                   }
                 }
@@ -138,9 +138,9 @@ module.exports = {
             });
             for (i = 0; i < volumn.length; i++) {
                 if(i==0)
-                volumn_detail.push({ titles: volumn[i].titles, hrefs: volumn[i].hrefs, next: 0, prev: volumn[i+1].hrefs});
+                volumn_detail.push({ titles: volumn[i].titles, hrefs: volumn[i].hrefs, next: null, prev: volumn[i+1].hrefs});
                 else if(i==volumn.length-1)
-                volumn_detail.push({ titles: volumn[i].titles, hrefs: volumn[i].hrefs, next: volumn[i-1].hrefs, prev: 0});
+                volumn_detail.push({ titles: volumn[i].titles, hrefs: volumn[i].hrefs, next: volumn[i-1].hrefs, prev: null});
                 else
                 volumn_detail.push({ titles: volumn[i].titles, hrefs: volumn[i].hrefs, next: volumn[i-1].hrefs, prev: volumn[i+1].hrefs});
                 // console.log(a[index]);
