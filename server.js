@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 var main       = require('./main');
 
 // DB
-// var mongoose   = require('mongoose');
+var mongoose   = require('mongoose');
 // var uri = 'mongodb://comicr:hunter318@ds033018.mlab.com:33018/comicr';
 // mongoose.connect(uri, function(error) {
 //     console.log(error);
