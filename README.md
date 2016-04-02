@@ -1,6 +1,9 @@
 # comicr
 About comic building by react and web crawler
 
+## Abstract
+Build a new crawler bot that easily to parse the data you want. Use Curl and jquery dom skills, we can easily build basic API. Backend serivce use express to control the whole sevices.
+
 node-libcurl
 install steps:    
 linux

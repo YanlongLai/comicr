@@ -12,10 +12,11 @@ var main       = require('./main');
 // DB
 var mongoose   = require('mongoose');
 // var uri = 'mongodb://comicr:hunter318@ds033018.mlab.com:33018/comicr';
+// var uri = 'mongodb://comicr:hunter318@ds025399.mlab.com:25399/comicr';
 // mongoose.connect(uri, function(error) {
-//     console.log(error);
+    // console.log(error);
 // }); // connect to our database
-// // Output - 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
+// Output - 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
 // console.log(mongoose.connection.readyState);
 
 // Start your program
