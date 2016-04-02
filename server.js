@@ -9,8 +9,20 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var main       = require('./main');
 
+// DB postgre
+var pgp = require("pg-promise")(/*options*/);
+var db = pgp("postgres://laiyanlong@localhost:5432/comicr");
+
+db.one("SELECT $1 AS value", 123)
+    .then(function (data) {
+        console.log("DATA:", data.value);
+    })
+    .catch(function (error) {
+        console.log("ERROR:", error);
+    });
+
 // DB
-var mongoose   = require('mongoose');
+// var mongoose   = require('mongoose');
 // var uri = 'mongodb://comicr:hunter318@ds033018.mlab.com:33018/comicr';
 // var uri = 'mongodb://comicr:hunter318@ds025399.mlab.com:25399/comicr';
 // mongoose.connect(uri, function(error) {
@@ -92,7 +104,7 @@ router.route('/bears')
 
     // create a bear (accessed at POST http://localhost:8080/api/bears)
     .post(function(req, res) {
-        
+
         var bear = new Bear();      // create a new instance of the Bear model
         bear.name = req.body.name;  // set the bears name (comes from the request)
 
@@ -103,7 +115,7 @@ router.route('/bears')
 
             res.json({ message: 'Bear created!' });
         });
-        
+
     });
 
     // // get all the bears (accessed at GET http://localhost:8080/api/bears)

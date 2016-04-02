@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var Curl = require( 'node-libcurl' ).Curl;
 var cheerio = require('cheerio');
- 
+
 var websitetitle = "manhua.fzdm.com/25/155/index_14.html";
 var result = [];
 function getPage (page){
@@ -11,7 +11,7 @@ function getPage (page){
     curl.setOpt( 'FOLLOWLOCATION', true );
 
     curl.on( 'end', function( statusCode, body, headers ) {
-        
+
         $ = cheerio.load(body);
 
         var fruits = [];

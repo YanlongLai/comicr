@@ -1,14 +1,14 @@
 var $ = require('jquery');
 var Curl = require( 'node-libcurl' ).Curl;
 var cheerio = require('cheerio');
- 
+
 // var curl = new Curl();
 var websitetitle = "manhua.fzdm.com/";
 var result = [];
 var volumn = [];
 var volumn_detail = [];
 var page = [];
-  
+
 module.exports = {
     _run: function (setJson) {
         var curl = new Curl();
@@ -17,7 +17,7 @@ module.exports = {
         //curl.setOpt( 'CURLOPT_CONNECTTIMEOUT', 2 );
         //curl.setOpt( 'CURLOPT_RETURNTRANSFER', 1 );
         //curl.setOpt( 'CURLOPT_USERAGENT', 'Comic' );
-       
+
         curl.on( 'end', function( statusCode, body, headers ) {
             /*
             console.info( statusCode );
@@ -84,7 +84,7 @@ module.exports = {
         var curl = new Curl();
         curl.setOpt( 'URL', websitetitle );
         curl.setOpt( 'FOLLOWLOCATION', true );
-       
+
         curl.on( 'end', function( statusCode, body, headers ) {
             /*
             console.info( statusCode );
@@ -160,7 +160,7 @@ module.exports = {
         var self = this;
         curl.setOpt( 'URL', websitetitle );
         curl.setOpt( 'FOLLOWLOCATION', true );
-       
+
         curl.on( 'end', function( statusCode, body, headers ) {
             /*
             console.info( statusCode );
