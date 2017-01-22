@@ -9,7 +9,7 @@
     "express": "~4.0.0",
     "jquery": "^2.2.1",
     "mongoose": "~3.6.13",
-    "node-libcurl": "^0.8.0"
+    "node-libcurl": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
