@@ -9,32 +9,6 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var main       = require('./main');
 
-// DB postgre
-// var pgp = require("pg-promise")(/*options*/);
-// var db = pgp("postgres://laiyanlong@localhost:5432/comicr");
-
-// db.one("SELECT $1 AS value", 123)
-//     .then(function (data) {
-//         console.log("DATA:", data.value);
-//     })
-//     .catch(function (error) {
-//         console.log("ERROR:", error);
-//     });
-
-// DB
-// var mongoose   = require('mongoose');
-// var uri = 'mongodb://comicr:hunter318@ds033018.mlab.com:33018/comicr';
-// var uri = 'mongodb://comicr:hunter318@ds025399.mlab.com:25399/comicr';
-// mongoose.connect(uri, function(error) {
-    // console.log(error);
-// }); // connect to our database
-// Output - 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
-// console.log(mongoose.connection.readyState);
-
-// Start your program
-// var Bear     = require('./app/models/bear');
-
-// configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -44,7 +18,7 @@ app.use(bodyParser.json());
 // 		and then pass to specfic router path 
 
 
-var port = process.env.PORT || 8000;        // set our port
+var port = process.env.PORT || 3000;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -83,11 +57,6 @@ router.get('/:comic', function(req, res, next) {
         res.write(JSON.stringify(data, null, 3));
         res.end();
     });
-
-    // res.setHeader('Content-Type', 'application/json');
-    // res.send(JSON.stringify(volumn, null, 3));
-    // res.end();
-    // next();
 });
 
 router.get('/:comic/:volumn*', function(req, res, next) {
@@ -121,16 +90,6 @@ router.route('/bears')
         });
 
     });
-
-    // // get all the bears (accessed at GET http://localhost:8080/api/bears)
-    // .get(function(req, res) {
-    //     Bear.find(function(err, bears) {
-    //         if (err)
-    //             res.send(err);
-
-    //         res.json(bears);
-    //     });
-    // });
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
