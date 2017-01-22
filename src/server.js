@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 // 		and then pass to specfic router path 
 
 
-var port = process.env.PORT || 3000;        // set our port
+var port = process.env.PORT || 5000;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
