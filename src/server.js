@@ -10,16 +10,16 @@ var bodyParser = require('body-parser');
 var main       = require('./main');
 
 // DB postgre
-var pgp = require("pg-promise")(/*options*/);
-var db = pgp("postgres://laiyanlong@localhost:5432/comicr");
+// var pgp = require("pg-promise")(/*options*/);
+// var db = pgp("postgres://laiyanlong@localhost:5432/comicr");
 
-db.one("SELECT $1 AS value", 123)
-    .then(function (data) {
-        console.log("DATA:", data.value);
-    })
-    .catch(function (error) {
-        console.log("ERROR:", error);
-    });
+// db.one("SELECT $1 AS value", 123)
+//     .then(function (data) {
+//         console.log("DATA:", data.value);
+//     })
+//     .catch(function (error) {
+//         console.log("ERROR:", error);
+//     });
 
 // DB
 // var mongoose   = require('mongoose');
@@ -55,6 +55,7 @@ var router = express.Router();              // get an instance of the express Ro
 // middleware to use for all requests
 router.use(function(req, res, next) {
     // do logging
+    console.log("test")
     // console.log(data.length);
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     var userAgent = req.headers['user-agent'];
@@ -65,6 +66,7 @@ router.use(function(req, res, next) {
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res, next) {
     // console.log(main._run);
+    console.log("index");
     res.setHeader('Content-Type', 'application/json');
     main._run( function (data) {
         res.write(JSON.stringify(data, null, 3));
@@ -75,6 +77,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:comic', function(req, res, next) {
     var comic = req.param('comic');
+    console.log('###', req.path.comic);
     res.setHeader('Content-Type', 'application/json');
     main._getVolumn(comic, function (data) {
         res.write(JSON.stringify(data, null, 3));
@@ -90,6 +93,7 @@ router.get('/:comic', function(req, res, next) {
 router.get('/:comic/:volumn*', function(req, res, next) {
     var comic = req.param('comic');
     var volumn = req.param('volumn');
+    console.log('###', comic);
     res.setHeader('Content-Type', 'application/json');
     main._getPage(comic, volumn, 0, function (data) {
         res.write(JSON.stringify(data, null, 3));
