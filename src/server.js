@@ -23,6 +23,7 @@ var port = process.env.PORT || 5000;        // set our port
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
+var routerView = express.Router();              // get an instance of the express Router
 
 
 
@@ -70,30 +71,15 @@ router.get('/:comic/:volumn*', function(req, res, next) {
     });
 });
 
-// more routes for our API will happen here
-// on routes that end in /bears
-// ----------------------------------------------------
-router.route('/bears')
-
-    // create a bear (accessed at POST http://localhost:8080/api/bears)
-    .post(function(req, res) {
-
-        var bear = new Bear();      // create a new instance of the Bear model
-        bear.name = req.body.name;  // set the bears name (comes from the request)
-
-        // save the bear and check for errors
-        bear.save(function(err) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Bear created!' });
-        });
-
-    });
+routerView.get('/', function(req, res, next) {
+    res.write('test---------');
+    res.end();
+});
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
+app.use('/view', routerView);
 
 // START THE SERVER
 // =============================================================================
