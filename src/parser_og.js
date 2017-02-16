@@ -2,10 +2,10 @@ var $ = require('jquery');
 var Curl = require( 'node-libcurl' ).Curl;
 var cheerio = require('cheerio');
 
-var websitetitle = "http://chinese.engadget.com/";
+var websitetitle = "manhua.fzdm.com/25/155/index_14.html";
 var result = [];
 function getPage (page){
-    // websitetitle = "manhua.fzdm.com/25/155/index_"+ page +".html";
+    websitetitle = "manhua.fzdm.com/25/155/index_"+ page +".html";
     var curl = new Curl();
     curl.setOpt( 'URL', websitetitle );
     curl.setOpt( 'FOLLOWLOCATION', true );
